@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+
 inquirer
   .prompt([
     {
@@ -60,6 +61,35 @@ inquirer
     },
   ])
   .then((answer) => {
+    let badge;
+    let licenseLink;
+    switch (answer.license) {
+      case "Apache License 2.0":
+        badge = "https://img.shields.io/badge/License-Apache_2.0-blue.svg";
+        licenseLink = "https://opensource.org/licenses/Apache-2.0";
+        break;
+      case "Boost Software License 1.0":
+        badge = "https://img.shields.io/badge/License-Boost_1.0-lightblue.svg";
+        licenseLink = "https://www.boost.org/LICENSE_1_0.txt";
+        break;
+      case "BSD 3-Clause License":
+        badge = "https://img.shields.io/badge/License-BSD_3--Clause-blue.svg";
+        licenseLink = "https://opensource.org/licenses/BSD-3-Clause";
+        break;
+      case "Eclipse Public License 1.0":
+        badge = "https://img.shields.io/badge/License-EPL_1.0-red.svg";
+        licenseLink = "https://opensource.org/licenses/EPL-1.0";
+        break;
+      case "GNU GPL v3":
+        badge = "https://img.shields.io/badge/License-GPLv3-blue.svg";
+        licenseLink = "https://www.gnu.org/licenses/gpl-3.0";
+        break;
+      case "IBM Public License Version 1.0":
+        badge = "https://img.shields.io/badge/License-IPL_1.0-blue.svg";
+        licenseLink = "https://opensource.org/licenses/IPL-1.0";
+        break;
+      case "ISC License (ISC)":
+        badge = "https://img.shields.io/badge/License-ISC-blue.svg";
         licenseLink = "https://opensource.org/licenses/ISC";
         break;
       case "Mozilla Public License 2.0":
