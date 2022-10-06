@@ -14,22 +14,22 @@ inquirer
       message: "Description: ",
     },
     {
-      type: "input",
+      type: "editor",
       name: "installation",
       message: "Install Instructions: ",
     },
     {
-      type: "input",
+      type: "editor",
       name: "usage",
       message: "Usage Information: ",
     },
     {
-      type: "input",
+      type: "editor",
       name: "contributing",
       message: "Contribution Guidelines: ",
     },
     {
-      type: "input",
+      type: "editor",
       name: "tests",
       message: "Test Instructions: ",
     },
@@ -61,46 +61,7 @@ inquirer
     },
   ])
   .then((answer) => {
-    let badge;
-    let licenseLink;
-    switch (answer.license) {
-      case "Apache License 2.0":
-        badge = "https://img.shields.io/badge/License-Apache_2.0-blue.svg";
-        licenseLink = "https://opensource.org/licenses/Apache-2.0";
-        break;
-      case "Boost Software License 1.0":
-        badge = "https://img.shields.io/badge/License-Boost_1.0-lightblue.svg";
-        licenseLink = "https://www.boost.org/LICENSE_1_0.txt";
-        break;
-      case "BSD 3-Clause License":
-        badge = "https://img.shields.io/badge/License-BSD_3--Clause-blue.svg";
-        licenseLink = "https://opensource.org/licenses/BSD-3-Clause";
-        break;
-      case "Eclipse Public License 1.0":
-        badge = "https://img.shields.io/badge/License-EPL_1.0-red.svg";
-        licenseLink = "https://opensource.org/licenses/EPL-1.0";
-        break;
-      case "GNU GPL v3":
-        badge = "https://img.shields.io/badge/License-GPLv3-blue.svg";
-        licenseLink = "https://www.gnu.org/licenses/gpl-3.0";
-        break;
-      case "IBM Public License Version 1.0":
-        badge = "https://img.shields.io/badge/License-IPL_1.0-blue.svg";
-        licenseLink = "https://opensource.org/licenses/IPL-1.0";
-        break;
-      case "ISC License (ISC)":
-        badge = "https://img.shields.io/badge/License-ISC-blue.svg";
-        licenseLink = "https://opensource.org/licenses/ISC";
-        break;
-      case "Mozilla Public License 2.0":
-        badge = "https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg";
-        licenseLink = "https://opensource.org/licenses/MPL-2.0";
-        break;
-      case "MIT License":
-        badge = "https://img.shields.io/badge/License-MIT-yellow.svg";
-        licenseLink = "https://opensource.org/licenses/MIT";
-        break;
-    }
+    const [badge, licenseLink] = renderBadge(answer.license);
 
     let content = `# ${answer.title} \n![${answer.license}](${badge})\n\n`;
     content += `- [Description](#description)\n\n- [Installation](#installation)\n\n- [Usage](#usage)\n\n- [Contributing](#contributing)\n\n- [Tests](#tests)\n\n- [License](#License)\n\n- [Questions](#questions)\n\n`;
@@ -114,7 +75,51 @@ inquirer
 
     console.log(content);
 
-    fs.writeFile(`RFEADME.md`, content, (err) =>
+    fs.writeFile(`README.md`, content, (err) =>
       err ? console.error(err) : console.log("Success!")
     );
   });
+
+function renderBadge(license) {
+  let badge;
+  let licenseLink;
+  switch (license) {
+    case "Apache License 2.0":
+      badge = "https://img.shields.io/badge/License-Apache_2.0-blue.svg";
+      licenseLink = "https://opensource.org/licenses/Apache-2.0";
+      break;
+    case "Boost Software License 1.0":
+      badge = "https://img.shields.io/badge/License-Boost_1.0-lightblue.svg";
+      licenseLink = "https://www.boost.org/LICENSE_1_0.txt";
+      break;
+    case "BSD 3-Clause License":
+      badge = "https://img.shields.io/badge/License-BSD_3--Clause-blue.svg";
+      licenseLink = "https://opensource.org/licenses/BSD-3-Clause";
+      break;
+    case "Eclipse Public License 1.0":
+      badge = "https://img.shields.io/badge/License-EPL_1.0-red.svg";
+      licenseLink = "https://opensource.org/licenses/EPL-1.0";
+      break;
+    case "GNU GPL v3":
+      badge = "https://img.shields.io/badge/License-GPLv3-blue.svg";
+      licenseLink = "https://www.gnu.org/licenses/gpl-3.0";
+      break;
+    case "IBM Public License Version 1.0":
+      badge = "https://img.shields.io/badge/License-IPL_1.0-blue.svg";
+      licenseLink = "https://opensource.org/licenses/IPL-1.0";
+      break;
+    case "ISC License (ISC)":
+      badge = "https://img.shields.io/badge/License-ISC-blue.svg";
+      licenseLink = "https://opensource.org/licenses/ISC";
+      break;
+    case "Mozilla Public License 2.0":
+      badge = "https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg";
+      licenseLink = "https://opensource.org/licenses/MPL-2.0";
+      break;
+    case "MIT License":
+      badge = "https://img.shields.io/badge/License-MIT-yellow.svg";
+      licenseLink = "https://opensource.org/licenses/MIT";
+      break;
+  }
+  return [badge, licenseLink];
+}
