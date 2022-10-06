@@ -61,22 +61,10 @@ inquirer
     },
   ])
   .then((answer) => {
-    const [badge, licenseLink] = renderBadge(answer.license);
-
-    let content = `# ${answer.title} \n![${answer.license}](${badge})\n\n`;
-    content += `- [Description](#description)\n\n- [Installation](#installation)\n\n- [Usage](#usage)\n\n- [Contributing](#contributing)\n\n- [Tests](#tests)\n\n- [License](#License)\n\n- [Questions](#questions)\n\n`;
-    content += `## Description\n ${answer.description}\n\n`;
-    content += `## Installation\n ${answer.installation}\n\n`;
-    content += `## Usage\n ${answer.usage}\n\n`;
-    content += `## Contributing\n ${answer.contributing}\n\n`;
-    content += `## Tests\n ${answer.tests}\n\n`;
-    content += `## License\n [${answer.license}](${licenseLink})\n\n`;
-    content += `## Questions\n [Contact Us Through Github](https://github.com/${answer.github})\n\n[Contact Us Through Email](mailto:${answer.email})\n\n`;
-
-    console.log(content);
-
-    fs.writeFile(`README.md`, content, (err) =>
-      err ? console.error(err) : console.log("Success!")
+    fs.writeFile(`README.md`, renderReadme(answer), (err) =>
+      err
+        ? console.error(err)
+        : console.log(`Readme for ${answer.title} successfully created.`)
     );
   });
 
@@ -122,4 +110,20 @@ function renderBadge(license) {
       break;
   }
   return [badge, licenseLink];
+}
+
+function renderReadme(answer) {
+  const [badge, licenseLink] = renderBadge(answer.license);
+
+  let content = `# ${answer.title} \n![${answer.license}](${badge})\n\n`;
+  content += `- [Description](#description)\n\n- [Installation](#installation)\n\n- [Usage](#usage)\n\n- [Contributing](#contributing)\n\n- [Tests](#tests)\n\n- [License](#License)\n\n- [Questions](#questions)\n\n`;
+  content += `## Description\n ${answer.description}\n\n`;
+  content += `## Installation\n ${answer.installation}\n\n`;
+  content += `## Usage\n ${answer.usage}\n\n`;
+  content += `## Contributing\n ${answer.contributing}\n\n`;
+  content += `## Tests\n ${answer.tests}\n\n`;
+  content += `## License\n [${answer.license}](${licenseLink})\n\n`;
+  content += `## Questions\n [Contact Us Through Github](https://github.com/${answer.github})\n\n[Contact Us Through Email](mailto:${answer.email})\n\n`;
+
+  return content;
 }
