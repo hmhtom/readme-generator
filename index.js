@@ -61,7 +61,7 @@ inquirer
     },
   ])
   .then((answer) => {
-    fs.writeFile(`README.md`, renderReadme(answer), (err) =>
+    fs.writeFile(`SampleREADME.md`, renderReadme(answer), (err) =>
       err
         ? console.error(err)
         : console.log(`Readme for ${answer.title} successfully created.`)
@@ -116,7 +116,7 @@ function renderReadme(answer) {
   const [badge, licenseLink] = renderBadge(answer.license);
 
   let content = `# ${answer.title} \n![${answer.license}](${badge})\n\n`;
-  content += `- [Description](#description)\n\n- [Installation](#installation)\n\n- [Usage](#usage)\n\n- [Contributing](#contributing)\n\n- [Tests](#tests)\n\n- [License](#License)\n\n- [Questions](#questions)\n\n`;
+  content += `- [Description](#description)\n\n- [Installation](#installation)\n\n- [Usage](#usage)\n\n- [Contributing](#contributing)\n\n- [Tests](#tests)\n\n- [License](#license)\n\n- [Questions](#questions)\n\n`;
   content += `## Description\n ${answer.description}\n\n`;
   content += `## Installation\n ${answer.installation}\n\n`;
   content += `## Usage\n ${answer.usage}\n\n`;
