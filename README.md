@@ -2,6 +2,8 @@
 
 ## Description
 
+This is a professional Readme Generator with command-line prompt. Mainly created for developers to create a high quality readme file for their project in a timely manner
+
 ## Installation
 
 > Open your terminal and `cd` to the correct directory
